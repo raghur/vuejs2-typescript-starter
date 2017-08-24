@@ -1,0 +1,11 @@
+
+<template>
+    <div>
+        <ol>
+            <todo-item v-for="item in todos" :todo="item" :key="item.id" :active.sync="active"></todo-item>
+
+        </ol>
+        <pre>{{$data}}</pre>
+    </div>
+</template>
+<script src="./app4.ts" />
