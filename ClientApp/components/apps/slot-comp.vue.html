@@ -1,0 +1,28 @@
+<template>
+    <div>
+        <h1>{{ title}}</h1>
+        <div class="content">
+            <slot name="content"></slot>
+        </div>
+        <div class="footer">
+            <slot name="footer"></slot>
+        </div>
+    </div>
+</template>
+
+<script>
+import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+
+@Component
+export default class SlotComp extends Vue {
+    @Prop()
+    title: string;
+}
+
+</script>
+
+<style>
+    div.content {background-color:blanchedalmond;}
+    div.footer {background-color: burlywood;}
+    </style>
