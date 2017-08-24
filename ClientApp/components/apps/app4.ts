@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import todo from './todo-item.vue.html';
+// import todo from './todo-item.vue.html';
 export default Vue.component('app4', {
     data: function() {
         return {
@@ -15,6 +15,6 @@ export default Vue.component('app4', {
         }
     },
     components: {
-        "todo-item": todo
+        "todo-item":  () => new Promise((resolve, reject) => require(["./todo-item.vue.html"], resolve))
     }
 });
