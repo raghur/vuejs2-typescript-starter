@@ -10,14 +10,18 @@
 <script>
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import SlotComponent from "./slot-comp.vue.html"
 import app2 from "./app2.vue.html"
 import app3 from "./app3.vue.html"
 
-@Component 
-export default class SlotMain extends Vue {
-    components= {
-        'slot-comp': SlotComponent
+@Component ({
+    components: {
+        'slot-comp': () => 
+            new Promise((resolve, reject) => require.ensure(
+                                                ["./slot-comp.vue.html"], 
+                                                ()=> resolve(require("./slot-comp.vue.html")), 
+                                                "comps"))
     }
+})
+export default class SlotMain extends Vue {
 } 
 </script>
