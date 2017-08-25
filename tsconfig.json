@@ -15,7 +15,4 @@
       "bin",
       "node_modules"
   ]
-  , "awesomeTypescriptLoaderOptions": {
-    "useTranspileModule": true
-  }
 }

@@ -14,8 +14,10 @@ import SlotComponent from "./slot-comp.vue.html"
 import app2 from "./app2.vue.html"
 import app3 from "./app3.vue.html"
 
-Vue.component("slot-comp", SlotComponent)
 @Component 
 export default class SlotMain extends Vue {
+    components= {
+        'slot-comp': SlotComponent
+    }
 } 
 </script>

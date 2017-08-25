@@ -15,11 +15,12 @@ import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class SlotComp extends Vue {
+class SlotComp extends Vue {
     @Prop()
     title: string;
 }
 
+export default Vue.component('slot-comp', SlotComp);
 </script>
 
 <style>
