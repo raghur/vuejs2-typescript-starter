@@ -13,13 +13,18 @@ import {Component} from 'vue-property-decorator';
 import app2 from "./app2.vue.html"
 import app3 from "./app3.vue.html"
 
-@Component ({
+// @Component ({
+//     components: {
+//         'slot-comp': () => 
+//             new Promise((resolve, reject) => require.ensure(
+//                                                 ["./slot-comp.vue.html"], 
+//                                                 ()=> resolve(require("./slot-comp.vue.html")), 
+//                                                 "comps"))
+//     }
+// })
+@Component({
     components: {
-        'slot-comp': () => 
-            new Promise((resolve, reject) => require.ensure(
-                                                ["./slot-comp.vue.html"], 
-                                                ()=> resolve(require("./slot-comp.vue.html")), 
-                                                "comps"))
+        "slot-comp": () => import(/* webpackChunkName = "comps" */ './slot-comp.vue.html')
     }
 })
 export default class SlotMain extends Vue {
