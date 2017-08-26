@@ -6,7 +6,17 @@ const bundleOutputDir = './wwwroot/dist';
 
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
-
+    var babelOptions = {
+        "plugins": ["syntax-dynamic-import"],
+        "presets": [
+            [
+                "es2015",
+                {
+                    "modules": false
+                }
+            ]
+        ]
+    };
     return [{
         stats: { modules: false },
         context: __dirname,
@@ -18,10 +28,17 @@ module.exports = (env) => {
                 { 
                     test: /\.ts$/, 
                     include: /ClientApp/, 
-                    loader: 'ts-loader', 
-                    options: { 
-                        appendTsSuffixTo: [/\.vue\.html$/] 
-                    } 
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: babelOptions
+                        }, {
+                            loader: 'ts-loader',
+                            options: {
+                                appendTsSuffixTo: [/\.vue\.html$/]
+                            } 
+                        }
+                    ]
                 },
                 { test: /\.css$/, use: isDevBuild ? ['style-loader', 'css-loader'] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
