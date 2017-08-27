@@ -3,9 +3,9 @@ import {Component} from 'vue-property-decorator';
 
 @Component({
     components: {
-        "todo-item":  () =>Promise.resolve(require.ensure(["./todo-item.vue.html"], 
-                                                            ()=> require("./todo-item.vue.html"), 
-                                                            "comps"))    
+        "todo-item":  () =>require.ensure(["./todo-item.vue.html"], 
+            () => require("./todo-item.vue.html"),
+            "comps")    
         }
 })
 export default class App4 extends Vue{
