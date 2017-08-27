@@ -1,4 +1,8 @@
 {
+  "include": [
+    "ClientApp/**/*",
+    "vue-shims.d.ts"
+  ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
