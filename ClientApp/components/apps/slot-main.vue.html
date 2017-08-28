@@ -8,19 +8,13 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
-import app2 from "./app2.vue.html"
-import app3 from "./app3.vue.html"
 
-@Component ({
+export default  {
     components: {
         'slot-comp': () => require.ensure(
             ["./slot-comp.vue.html"],
             () => require("./slot-comp.vue.html"),
             "comps")
     }
-})
-export default class SlotMain extends Vue {
 } 
 </script>
