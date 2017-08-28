@@ -8,23 +8,45 @@ module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
 
     return [{
-        stats: { modules: false },
+        stats: {
+            modules: false
+        },
         context: __dirname,
-        resolve: { extensions: [ '.js', '.ts', '.vue.html' ] },
-        entry: { 'main': './ClientApp/boot.ts' },
+        resolve: {
+            extensions: ['.js', '.ts', '.vue.html']
+        },
+        entry: {
+            'main': './ClientApp/boot.ts'
+        },
         module: {
-            rules: [
-                { test: /\.vue\.html$/, include: /ClientApp/, loader: 'vue-loader', options: { loaders: { js: 'ts-loader' } } },
-                { 
-                    test: /\.ts$/, 
-                    include: /ClientApp/, 
-                    loader: 'ts-loader', 
-                    options: { 
-                        appendTsSuffixTo: [/\.vue\.html$/] 
-                    } 
+            rules: [{
+                    test: /\.vue\.html$/,
+                    include: /ClientApp/,
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+                            js: 'ts-loader'
+                        }
+                    }
                 },
-                { test: /\.css$/, use: isDevBuild ? ['style-loader', 'css-loader'] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+                {
+                    test: /\.ts$/,
+                    include: /ClientApp/,
+                    loader: 'ts-loader',
+                    options: {
+                        appendTsSuffixTo: [/\.vue\.html$/]
+                    }
+                },
+                {
+                    test: /\.css$/,
+                    use: isDevBuild ? ['style-loader', 'css-loader'] : ExtractTextPlugin.extract({
+                        use: 'css-loader?minimize'
+                    })
+                },
+                {
+                    test: /\.(png|jpg|jpeg|gif|svg)$/,
+                    use: 'url-loader?limit=25000'
+                }
             ]
         },
         output: {
