@@ -1,0 +1,24 @@
+<template>
+    <div>
+        <textarea v-model="text"></textarea>
+        <button @click="save">Save</button>
+        <button @click="cancel">Cancel</button>
+    </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import {Component} from 'vue-property-decorator'
+
+@Component
+export default  class TodoEditor extends Vue{
+    text:string = this.$store.state.active.text
+    
+    save(this:TodoEditor) {
+        this.$store.commit("updateTodo", this.text)
+    }
+    cancel(this:Vue) {
+            this.$store.commit("setActive", null)
+    }
+}
+</script>

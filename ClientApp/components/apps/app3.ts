@@ -1,12 +1,18 @@
 import Vue from 'vue';
-export default Vue.component('app3', {
-    data: function() {
-        return {
-            todos: [
-                {text: "item 1"},
-                {text: "item 2"},
-                {text: "item 3"}
-            ]
+interface todo {
+    text: string,
+}
+export default  Vue.component("app3", {
+    props: ["simple", "headerText"],
+    computed: {
+        todos: function(this: Vue) { return this.$store.getters.todos },
+        hasActive: function(this:Vue) { return this.$store.getters.hasActive}
+    },
+    methods: {
+        setActive(this:Vue, todo:todo) {
+            console.log("in edit", todo)
+            this.$store.commit('setActive', todo);
         }
     }
+
 });
