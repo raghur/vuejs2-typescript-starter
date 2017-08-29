@@ -1,9 +1,12 @@
 import Vuex from 'vuex'
 import Vue from 'vue';
+import  * as MUTATIONS from './mutation-types'
+
 interface todo {
     text:string
 }
 Vue.use(Vuex);
+export {MUTATIONS}
 export default new Vuex.Store({
     state: {
         todos: [
@@ -19,10 +22,10 @@ export default new Vuex.Store({
         hasActive: state => state.active!=null
     },
     mutations: {
-        setActive(state, todo) {
+        [MUTATIONS.SETACTIVE](state, todo) {
             state.active =  todo
         },
-        updateTodo(state, text) {
+        [MUTATIONS.UPDATETODO](state, text) {
             state.active!.text = text
             state.active = null;
         }
