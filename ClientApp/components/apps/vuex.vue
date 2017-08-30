@@ -1,5 +1,6 @@
 <template>
     <div >
+        <h3>Vuex example</h3>
         <p>
         This is a more complicated example. We manage a list of todos - stored in
         Vuex. Clicking edit sets the active property which is shared between the editor and the list view. The 
@@ -19,11 +20,12 @@
 <script>
 import Vue from 'vue'
 import app3 from './app3.vue'
-import todoeditor from './todo-editor.vue'
+import todoEditor from './todo-editor.vue'
 import {MUTATIONS} from "../../store"
 export default {
     components: {
-        'todo-editor': todoeditor
+         todoEditor,
+         app3
     },
     computed: {
         hasActive: function(this:Vue) {
