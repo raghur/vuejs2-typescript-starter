@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const bundleOutputDir = './wwwroot/dist';
 
 module.exports = (env) => {
@@ -35,7 +35,8 @@ module.exports = (env) => {
                     include: /ClientApp/,
                     loader: 'ts-loader',
                     options: {
-                        appendTsSuffixTo: [/\.vue$/]
+                        appendTsSuffixTo: [/\.vue$/],
+                        transpileOnly:true
                     }
                 },
                 {
@@ -56,7 +57,7 @@ module.exports = (env) => {
             publicPath: 'dist/'
         },
         plugins: [
-            new CheckerPlugin(),
+            new ForkTsCheckerWebpackPlugin(),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: JSON.stringify(isDevBuild ? 'development' : 'production')
