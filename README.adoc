@@ -11,8 +11,8 @@ future me when I want to build an actual web UI. A few of the things
 
 . Upgraded to latest Vue(2.3.2 -> 2.4.2) and Typescript (2.3 -> 2.4)
 . Got rid of `awesome-typescript-loader` and got back `ts-loader` which lets you import .vue components easily.
-. Added examples of simple components, slots and vuex.
-. Added examples of bundling components into chunks - Vue Async Component + webpack's code splitting feature.
-. Removed .vue.html extension and named back to .vue - works better with the vetur plugin under VS Code.
+. Added examples of simple components, https://vuejs.org/v2/guide/components.html#Named-Slots[slots] and https://vuex.vuejs.org/en/intro.html[vuex].
+. Added examples of bundling components into chunks - https://vuejs.org/v2/guide/components.html#Async-Components[Vue Async Component] + https://webpack.js.org/guides/code-splitting/[webpack's code splitting] feature.
+. Removed .vue.html extension and named back to .vue - works better with the https://marketplace.visualstudio.com/items?itemName=octref.vetur[vetur] plugin under VS Code.
 
 
