@@ -1,6 +1,6 @@
 <template>
     <div>
-    <h3>Store</h3>
+    <h3 v-if="headerText">Store</h3>
     <p> 
         {{ headerText}}
     </p>
