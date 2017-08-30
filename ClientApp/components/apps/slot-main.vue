@@ -12,8 +12,8 @@
 export default  {
     components: {
         'slot-comp': () => Promise.resolve(require.ensure(
-            ["./slot-comp.vue.html"],
-            () => require("./slot-comp.vue.html"),
+            ["./slot-comp.vue"],
+            () => require("./slot-comp.vue"),
             "comps"))
     }
 } 

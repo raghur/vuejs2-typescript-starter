@@ -13,14 +13,14 @@ module.exports = (env) => {
         },
         context: __dirname,
         resolve: {
-            extensions: ['.js', '.ts', '.vue.html']
+            extensions: ['.js', '.ts', '.vue']
         },
         entry: {
             'main': './ClientApp/boot.ts'
         },
         module: {
             rules: [{
-                    test: /\.vue\.html$/,
+                    test: /\.vue$/,
                     include: /ClientApp/,
                     loader: 'vue-loader',
                     options: {
@@ -34,7 +34,7 @@ module.exports = (env) => {
                     include: /ClientApp/,
                     loader: 'ts-loader',
                     options: {
-                        appendTsSuffixTo: [/\.vue\.html$/]
+                        appendTsSuffixTo: [/\.vue$/]
                     }
                 },
                 {

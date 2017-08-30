@@ -20,8 +20,8 @@ export default {
 
     components: {
         "todo-item": () => Promise.resolve(require.ensure(
-                                    ["./todo-item.vue.html"],
-                                    () => require("./todo-item.vue.html"),
+                                    ["./todo-item.vue"],
+                                    () => require("./todo-item.vue"),
                                     "comps"))
     }
 }

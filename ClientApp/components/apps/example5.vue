@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import SlotComp from "./slot-comp.vue.html"
-import App2 from "./app2.vue.html"
-import App4 from "./app4.vue.html"
-import SlotMain from "./slot-main.vue.html"
+import SlotComp from "./slot-comp.vue"
+import App2 from "./app2.vue"
+import App4 from "./app4.vue"
+import SlotMain from "./slot-main.vue"
 export default {
     components: {
         'slot-main': SlotMain,

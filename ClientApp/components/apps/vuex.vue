@@ -13,8 +13,8 @@
 
 <script>
 import Vue from 'vue'
-import app3 from './app3.vue.html'
-import todoeditor from './todo-editor.vue.html'
+import app3 from './app3.vue'
+import todoeditor from './todo-editor.vue'
 export default {
     components: {
         'todo-editor': todoeditor
