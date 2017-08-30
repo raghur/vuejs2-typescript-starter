@@ -25,7 +25,8 @@ module.exports = (env) => {
                     loader: 'vue-loader',
                     options: {
                         loaders: {
-                            js: 'ts-loader'
+                            js: 'ts-loader',
+                            ts: 'ts-loader'
                         }
                     }
                 },
