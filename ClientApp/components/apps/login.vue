@@ -52,7 +52,6 @@ export default class Login extends Vue{
                     t: Math.random().toString()
                 }
             });
-            // location.reload()
         });
     }
     get isLoggedIn () {
