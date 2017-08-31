@@ -21,6 +21,9 @@ https://vuex.vuejs.org/en/intro.html[vuex].
 https://vuejs.org/v2/guide/components.html#Async-Components[Vue Async
 Component] + https://webpack.js.org/guides/code-splitting/[webpack's code
 splitting] feature.
+. Hooked in babel-loader in webpack - so ts transpilation path is 
+`TS ---ts-loader---> ES2015 ----babel-loader--> ES5`. This lets us use the dynamic 
+import statement in TS 2.4 for defining async components.
 . Removed .vue.html extension and named back to .vue - works better with the
 https://marketplace.visualstudio.com/items?itemName=octref.vetur[vetur] plugin
 under VS Code.
