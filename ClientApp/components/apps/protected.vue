@@ -10,7 +10,7 @@
 import {LoginMixin} from './loginrequest'
 import Login from './login.vue'
 export default {
-  mixins: [new LoginMixin()],
+  mixins: [LoginMixin],
   components: {
       Login
   }

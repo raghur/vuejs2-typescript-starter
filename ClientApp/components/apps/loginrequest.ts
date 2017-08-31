@@ -4,20 +4,20 @@ export default interface LoginRequest {
     password:string
 }
 
-class LoginMixin extends Vue{
-    created() {
+var LoginMixin = {
+    created(this:Vue) {
         console.log("LoginMixin.created() called")
         if (!this.$store.getters.isLoggedIn) {
             this.$router.replace ({path:"/login", query: {"from": this.$route.fullPath}})
         }
-   }
-   beforeUpdate() {
+   },
+   beforeUpdate(this:Vue) {
         console.log("LoginMixin.beforeUpdate() called")
         if (!this.$store.getters.isLoggedIn) {
             this.$router.replace ({path:"/login", query: {"from": this.$route.fullPath}})
         }
-   }
-   computed = {
+   },
+   computed : {
        t(this:Vue):string{
            return this.$route.query.t
        }
