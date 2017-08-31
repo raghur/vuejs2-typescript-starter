@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import {LoginMixin} from './loginrequest'
 import Login from './login.vue'
 export default {

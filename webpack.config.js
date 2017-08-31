@@ -8,7 +8,7 @@ var babelLoader = {
   options: {
     cacheDirectory: true,
     presets: [
-        "env"
+        "es2015"
     ],
     plugins: ["syntax-dynamic-import"]
   }
@@ -34,8 +34,8 @@ module.exports = (env) => {
                     loader: 'vue-loader',
                     options: {
                         loaders: {
-                            js: 'ts-loader',
-                            ts: 'ts-loader'
+                            js: [babelLoader, 'ts-loader'],
+                            ts: [babelLoader, 'ts-loader']
                         }
                     }
                 },
