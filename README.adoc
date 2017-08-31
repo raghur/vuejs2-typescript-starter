@@ -28,4 +28,12 @@ import statement in TS 2.4 for defining async components.
 https://marketplace.visualstudio.com/items?itemName=octref.vetur[vetur] plugin
 under VS Code.
 
+## Getting started
+
+. Clone this repo
+. Run `npm install`
+. `set ASPNETCORE_ENVIRONMENT=Development`
+. Run it with `dotnet run`
+. Visit `localhost:5000/`
+
 
