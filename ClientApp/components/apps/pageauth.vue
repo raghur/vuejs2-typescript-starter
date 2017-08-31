@@ -8,7 +8,7 @@
       <p>For successful login, type in any username/password</p>
       <p>For a failed login, use username = "bad"</p>
       <p><span style="font-weight:bold">NOTE: DO not actually use this approach for protecting pages.A much better way is to markup routes 
-          with meta attribute like 'RequiresAuth' and then use the route update hooks to 
+          with <a href="https://router.vuejs.org/en/advanced/meta.html">meta attribute</a>  like 'RequiresAuth' and then use the route update hooks to 
           check whether the user is authenticated.
           </span>
       </p>

@@ -60,7 +60,7 @@
                     </li>
                     <li>
                         <router-link to="/pageauth">
-                            <span class="glyphicon glyphicon-th-list"></span>Route Interception
+                            <span class="glyphicon glyphicon-th-list"></span>Login Mixin
                         </router-link>
                     </li>
                 </ul>
