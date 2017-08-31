@@ -11,10 +11,7 @@
 
 export default  {
     components: {
-        'slot-comp': () => Promise.resolve(require.ensure(
-            ["./slot-comp.vue"],
-            () => require("./slot-comp.vue"),
-            "comps"))
+        'slot-comp': () => import(/* webpackChunkName: "comps" */"./slot-comp.vue")
     }
 } 
 </script>

@@ -3,7 +3,16 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const bundleOutputDir = './wwwroot/dist';
-
+var babelLoader = {
+  loader: 'babel-loader',
+  options: {
+    cacheDirectory: true,
+    presets: [
+        "env"
+    ],
+    plugins: ["syntax-dynamic-import"]
+  }
+};
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
 
@@ -33,11 +42,16 @@ module.exports = (env) => {
                 {
                     test: /\.ts$/,
                     include: /ClientApp/,
-                    loader: 'ts-loader',
-                    options: {
-                        appendTsSuffixTo: [/\.vue$/],
-                        transpileOnly:true
-                    }
+                    use: [
+                        babelLoader,
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                appendTsSuffixTo: [/\.vue$/],
+                                transpileOnly: true
+                            }
+                        }
+                    ]
                 },
                 {
                     test: /\.css$/,

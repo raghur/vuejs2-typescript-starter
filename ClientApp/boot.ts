@@ -16,8 +16,8 @@ const routes = [
         shared - so we could have done the same thing with a data function.`
         } },
     { path: '/app4', component: require('./components/apps/app4.vue') },
-    { path: '/slots', component: () => require.ensure(['./components/apps/slot-main.vue'], ()=> require('./components/apps/slot-main.vue'), "comps") },
-    { path: '/example5', component: () => require.ensure(['./components/apps/example5.vue'], ()=> require('./components/apps/example5.vue'), "comps") },
+    { path: '/slots', component: () => import(/* webpackChunkName: "comps" */ './components/apps/slot-main.vue') },
+    { path: '/example5', component: () => import(/* webpackChunkName: "comps" */ './components/apps/example5.vue')},
     { path: '/Vuex', component: require("./components/apps/vuex.vue")  },
     { path: "/login", component: require("./components/apps/login.vue")},
     { path: "/pageauth", component: require("./components/apps/pageauth.vue")},

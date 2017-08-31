@@ -6,9 +6,9 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es2015",
     "sourceMap": true,
     "skipDefaultLibCheck": true,
     "strict": true,

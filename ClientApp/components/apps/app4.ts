@@ -19,9 +19,6 @@ export default {
     }),
 
     components: {
-        "todo-item": () => Promise.resolve(require.ensure(
-                                    ["./todo-item.vue"],
-                                    () => require("./todo-item.vue"),
-                                    "comps"))
+        "todo-item": () => import(/* webpackChunkName: "comps" */ "./todo-item.vue")
     }
 }
