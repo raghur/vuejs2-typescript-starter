@@ -58,6 +58,11 @@
                             <span class="glyphicon glyphicon-th-list"></span>Vuex Example 
                         </router-link>
                     </li>
+                    <li>
+                        <router-link to="/pageauth">
+                            <span class="glyphicon glyphicon-th-list"></span>Route Interception
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>

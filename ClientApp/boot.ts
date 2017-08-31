@@ -18,7 +18,10 @@ const routes = [
     { path: '/app4', component: require('./components/apps/app4.vue') },
     { path: '/slots', component: () => require.ensure(['./components/apps/slot-main.vue'], ()=> require('./components/apps/slot-main.vue'), "comps") },
     { path: '/example5', component: () => require.ensure(['./components/apps/example5.vue'], ()=> require('./components/apps/example5.vue'), "comps") },
-    { path: '/Vuex', component: require("./components/apps/vuex.vue")  }
+    { path: '/Vuex', component: require("./components/apps/vuex.vue")  },
+    { path: "/login", component: require("./components/apps/login.vue")},
+    { path: "/pageauth", component: require("./components/apps/pageauth.vue")},
+    { path: "/protected", component: require("./components/apps/protected.vue")}
 ];
 
 new Vue({
