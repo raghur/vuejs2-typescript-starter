@@ -21,12 +21,30 @@ const routes = [
     { path: '/Vuex', component: require("./components/apps/vuex.vue")  },
     { path: "/login", component: require("./components/apps/login.vue")},
     { path: "/pageauth", component: require("./components/apps/pageauth.vue")},
-    { path: "/protected", component: require("./components/apps/protected.vue")}
+    { path: "/protected", component: require("./components/apps/protected.vue")},
+    { path: "/route-meta", component: require("./components/apps/protected.vue"), meta: {requiresAuth: true}}
 ];
-
+let router = new VueRouter({ mode: 'history', routes: routes })
 new Vue({
     el: '#app-root',
     store: store,
-    router: new VueRouter({ mode: 'history', routes: routes }),
+    router: router,
     render: h => h(require('./components/app/app.vue'))
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(r => r.meta.requiresAuth)) {
+        if (!store.getters.isLoggedIn) {
+            next({
+                path: "/login",
+                query: {
+                    from: to.fullPath
+                }
+            });
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 });

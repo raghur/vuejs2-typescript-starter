@@ -63,6 +63,11 @@
                             <span class="glyphicon glyphicon-th-list"></span>Login Mixin
                         </router-link>
                     </li>
+                    <li>
+                        <router-link to="/route-meta">
+                            <span class="glyphicon glyphicon-th-list"></span>Route meta field
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
