@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.42",
     "@types/webpack-env": "^1.13.0",
     "aspnet-webpack": "^2.0.1",
     "babel-core": "^6.26.0",
@@ -46,5 +48,8 @@
   },
   "dependencies": {
     "vuex": "^2.3.1"
+  },
+  "scripts": {
+    "test": "node node_modules/karma/bin/karma start --single-run"
   }
 }

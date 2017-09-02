@@ -27,7 +27,7 @@ module.exports = (env) => {
     let tsLoadersArr = [babelLoader, tsLoader];
     if (isTestBuild) {
         vuetsloaders = ['istanbul-instrumenter-loader'].concat(vuetsloaders);
-        tsLoadersArr =  ['istanbul-instrumenter-loader'].concat(tsLoadersArr);
+        tsLoadersArrInstrumented =  ['istanbul-instrumenter-loader'].concat(tsLoadersArr);
     }
     console.log("Is running tests:", isTestBuild)
     console.log("Dev Build:", isDevBuild)
@@ -47,6 +47,7 @@ module.exports = (env) => {
                 {
                     test: /\.vue$/,
                     loader: 'vue-loader',
+                    include: /ClientApp/,
                     options: {
                         loaders: {
                             js: vuetsloaders,
@@ -60,7 +61,8 @@ module.exports = (env) => {
                 },
                 {
                     test: /\.ts$/,
-                    use: tsLoadersArr
+                    include: /ClientApp/,
+                    use: isTestBuild? tsLoadersArrInstrumented: tsLoadersArr
                 },
                 {
                     test: /\.css$/,
@@ -72,7 +74,11 @@ module.exports = (env) => {
                     test: /\.(png|jpg|jpeg|gif|svg)$/,
                     use: 'url-loader?limit=25000'
                 }
-            ]
+            ].concat(isTestBuild? [{
+                    test: /\.ts$/,
+                    include: /test/,
+                    use:  tsLoadersArr
+            }]:[])
         },
         output: {
             path: path.join(__dirname, bundleOutputDir),
