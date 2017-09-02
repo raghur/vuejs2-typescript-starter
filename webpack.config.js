@@ -13,9 +13,24 @@ var babelLoader = {
     plugins: ["syntax-dynamic-import"]
   }
 };
+const tsLoader = {
+    loader: 'ts-loader',
+    options: {
+        appendTsSuffixTo: [/\.vue$/],
+        transpileOnly: true
+    }
+};
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
-
+    const isTestBuild = (env && env.test);
+    let vuetsloaders = [babelLoader,'ts-loader'];
+    let tsLoadersArr = [babelLoader, tsLoader];
+    if (isTestBuild) {
+        vuetsloaders = ['istanbul-instrumenter-loader'].concat(vuetsloaders);
+        tsLoadersArr =  ['istanbul-instrumenter-loader'].concat(tsLoadersArr);
+    }
+    console.log("Is running tests:", isTestBuild)
+    console.log("Dev Build:", isDevBuild)
     return [{
         stats: {
             modules: false
@@ -28,30 +43,24 @@ module.exports = (env) => {
             'main': './ClientApp/boot.ts'
         },
         module: {
-            rules: [{
+            rules: [
+                {
                     test: /\.vue$/,
-                    include: /ClientApp/,
                     loader: 'vue-loader',
                     options: {
                         loaders: {
-                            js: [babelLoader, 'ts-loader'],
-                            ts: [babelLoader, 'ts-loader']
+                            js: vuetsloaders,
+                            ts: vuetsloaders
                         }
                     }
                 },
                 {
+                    test: /\.js$/,
+                    loader: babelLoader,
+                },
+                {
                     test: /\.ts$/,
-                    include: /ClientApp/,
-                    use: [
-                        babelLoader,
-                        {
-                            loader: 'ts-loader',
-                            options: {
-                                appendTsSuffixTo: [/\.vue$/],
-                                transpileOnly: true
-                            }
-                        }
-                    ]
+                    use: tsLoadersArr
                 },
                 {
                     test: /\.css$/,
@@ -76,12 +85,13 @@ module.exports = (env) => {
                 'process.env': {
                     NODE_ENV: JSON.stringify(isDevBuild ? 'development' : 'production')
                 }
-            }),
+            })
+        ].concat(isTestBuild? []: [
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
-            })
-        ].concat(isDevBuild ? [
+            })])
+        .concat(isDevBuild ? [
             // Plugins that apply in development builds only
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
