@@ -12,6 +12,7 @@ could be improved in general. Should help future me when I want to build an
 actual web UI. A few of the things 
 
 . Upgraded to latest Vue(2.3.2 -> 2.4.2) and Typescript (2.3 -> 2.4)
+. Added component unit test along with code coverage for typescript.
 . Got rid of `awesome-typescript-loader` and got back `ts-loader` which lets
 you import .vue components easily.
 . Added examples of simple components,
@@ -37,3 +38,16 @@ under VS Code.
 . Visit `localhost:5000/`
 
 
+## Notes - Unit testing and code coverage.
+
+Getting Karma, webpack and code coverage to play nice with each other took some doing.
+As of this writing (Sep 2017), karma coverage was broken when used with ts transpilation and html report
+generation fails with error. 
+
+. For getting code coverage across all your code, you need to create an index.js which pulls in
+all your tests and all your sources.
+. In karma.conf.js, we set `env={test:1}` and then require our webpack conf. Within webpack config,
+we instrument sources with `istanbul-instrumenter-loader` based on test being true.
+. In a test build, we also add a rule for building ts files under `test` without the instrumenter.
+. In karma config, we replace `karma-coverage` with
+https://github.com/mattlewis92/karma-coverage-istanbul-reporter[`karma-coverage-istanbul-reporter`]
