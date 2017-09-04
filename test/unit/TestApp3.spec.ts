@@ -33,9 +33,11 @@ describe('app3.vue', () => {
     });
 
     it("should render todos", (done)=> {
-        const wrapper = mount(app3, {store})
-        wrapper.setProps({
-            simple: true
+        const wrapper = mount(app3, {
+            store,
+            propsData: {
+                simple: true
+            }
         });
         expect(wrapper.text()).not.to.contain('a header')
         Vue.nextTick(() => {
