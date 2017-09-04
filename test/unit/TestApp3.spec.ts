@@ -32,7 +32,7 @@ describe('app3.vue', () => {
         expect(wrapper.text()).to.contain('a header')
     });
 
-    it("should render todos", ()=> {
+    it("should render todos", (done)=> {
         const wrapper = mount(app3, {store})
         wrapper.setProps({
             simple: true
@@ -41,6 +41,7 @@ describe('app3.vue', () => {
         Vue.nextTick(() => {
             expect(wrapper.find("li").length).to.equal(1)
             expect(wrapper.find("li")[0].text()).to.contain("an item")
+            done()
         })
     });
 });
