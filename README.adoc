@@ -37,6 +37,9 @@ under VS Code.
 . Run it with `dotnet run`
 . Visit `localhost:5000/`
 
+### To run client side tests
+
+After you have done `npm install` run `npm run test`
 
 ## Notes - Unit testing and code coverage.
 
