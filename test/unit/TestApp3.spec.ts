@@ -34,9 +34,13 @@ describe('app3.vue', () => {
 
     it("should render todos", ()=> {
         const wrapper = mount(app3, {store})
+        wrapper.setProps({
+            simple: true
+        });
         expect(wrapper.text()).not.to.contain('a header')
         Vue.nextTick(() => {
-            expect(wrapper.text()).to.contain("an item")
+            expect(wrapper.find("li").length).to.equal(1)
+            expect(wrapper.find("li")[0].text()).to.contain("an item")
         })
     });
 });
