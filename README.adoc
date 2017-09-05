@@ -54,3 +54,28 @@ we instrument sources with `istanbul-instrumenter-loader` based on test being tr
 . In a test build, we also add a rule for building ts files under `test` without the instrumenter.
 . In karma config, we replace `karma-coverage` with
 https://github.com/mattlewis92/karma-coverage-istanbul-reporter[`karma-coverage-istanbul-reporter`]
+
+## Notes - Debugging unit tests with Karma & sourcemaps
+
+A good dev experience is critical - so being able to debug unit tests in browser is important. Since
+the source gets transpiled before it reaches the browser, having source map support is super critical.
+Getting this to work again was jumping through hoops - karma and webpack handovers aren't exactly well
+documented. In the end, I could get it to work only with the following:
+
+. Don't include code coverage instrumentation while debugging - pretty self evident.
+. Include inline source maps in test/dev builds
++
+[source, javascript]
+-------------
+        .concat(isDevBuild || isTestBuild ? [
+            // this is required for source map debugging 
+            new webpack.SourceMapDevToolPlugin({
+                filename: null, // only inline source maps seem to work when debugging with chrome
+                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]'), // Point sourcemap entries to the original file locations on disk
+                test: /\.(ts|js|vue)$/
+            }),
+        ] : [
+        // prod config
+        ]
+-------------
+. Use `karma-sourcemap-loader` in karma conf
