@@ -1,5 +1,12 @@
 const path = require('path')
 let env = {test: 1}
+function isDebug(arg) {
+  return arg === '--debug'
+}
+if (process.argv.some(isDebug)) {
+  console.log("Is Debugging", true)
+  env.debugging = 1
+}
 var webpackConfig = require('./webpack.config')(env)
 
 module.exports = function (config) {
@@ -8,20 +15,22 @@ module.exports = function (config) {
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html
     // 2. add it to the `browsers` array below.
-    browsers: ['PhantomJS'],
+    browsers: ['jsdom'],
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['spec', 'coverage-istanbul'],
     files: [
         'wwwroot/dist/vendor.js',
+        {pattern: 'wwwroot/dist/*.map', included:false, served:true},
         'node_modules/babel-polyfill/dist/polyfill.js',
         'test/index.js', 
         ],
     preprocessors: {
-      'test/index.js': ['webpack', 'sourcemap']
+      'test/index.js': ['webpack', 'sourcemap'],
     },
     plugins: [
         // Launchers
         'karma-phantomjs-launcher',
+        'karma-jsdom-launcher',
 
         // Test Libraries
         'karma-mocha',

@@ -23,11 +23,14 @@ const tsLoader = {
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     const isTestBuild = (env && env.test);
+    const isDebugging = (env && env.debugging)
     let vuetsloaders = [babelLoader,'ts-loader'];
     let tsLoadersArr = [babelLoader, tsLoader];
-    if (isTestBuild) {
+    if (isTestBuild && !isDebugging) {
         vuetsloaders = ['istanbul-instrumenter-loader'].concat(vuetsloaders);
         tsLoadersArrInstrumented =  ['istanbul-instrumenter-loader'].concat(tsLoadersArr);
+    } else {
+        tsLoadersArrInstrumented = tsLoadersArr;
     }
     console.log("Is running tests:", isTestBuild)
     console.log("Dev Build:", isDevBuild)
@@ -40,7 +43,7 @@ module.exports = (env) => {
             extensions: ['.js', '.ts', '.vue']
         },
         entry: {
-            'main': './ClientApp/boot.ts'
+            'main': ['./ClientApp/boot.ts']
         },
         module: {
             rules: [
@@ -95,18 +98,20 @@ module.exports = (env) => {
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
-            })]
-        .concat(isDevBuild ? [
-            // Plugins that apply in development builds only
-            new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map', // Remove this line if you prefer inline source maps
-                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
             })
+        ]
+        .concat(isDevBuild || isTestBuild ? [
+            // this is required for source map debugging 
+            new webpack.SourceMapDevToolPlugin({
+                filename: null, // only inline source maps seem to work when debugging with chrome
+                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]'), // Point sourcemap entries to the original file locations on disk
+                test: /\.(ts|js|vue)$/
+            }),
         ] : [
             // Plugins that apply in production builds only
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
-                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
+                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]'), // Point sourcemap entries to the original file locations on disk
             }),
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
@@ -115,5 +120,6 @@ module.exports = (env) => {
             }),
             new ExtractTextPlugin('site.css')
         ])
-    }];
+    }, 
+];
 };
