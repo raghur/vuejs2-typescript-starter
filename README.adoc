@@ -12,19 +12,23 @@ could be improved in general. Should help future me when I want to build an
 actual web UI. A few of the things 
 
 . Upgraded to latest Vue(2.3.2 -> 2.4.2) and Typescript (2.3 -> 2.4)
-. Added component unit test along with code coverage for typescript.
-. Got rid of `awesome-typescript-loader` and got back `ts-loader` which lets
-you import .vue components easily.
+. Got rid of `awesome-typescript-loader` and got back `ts-loader` which *lets
+you import .vue components* easily.
 . Added examples of simple components,
 https://vuejs.org/v2/guide/components.html#Named-Slots[slots] and
 https://vuex.vuejs.org/en/intro.html[vuex].
-. Added examples of bundling components into chunks -
+. Added example of *unit testing components* with `avoriaz` and plain vue with 
+karma, mocha, chai & sinon. 
+. Unit test runs report *code coverage* tracked back to original Typescript source.
+. Updated webpack config to handle debugging tests with source map support - meaning
+you can *place breakpoints directly in Typescript code when debugging in Chrome*.
+. Added examples of *bundling components into chunks* -
 https://vuejs.org/v2/guide/components.html#Async-Components[Vue Async
 Component] + https://webpack.js.org/guides/code-splitting/[webpack's code
 splitting] feature.
 . Hooked in babel-loader in webpack - so ts transpilation path is 
-`TS ---ts-loader---> ES2015 ----babel-loader--> ES5`. This lets us use the dynamic 
-import statement in TS 2.4 for defining async components.
+`TS ---ts-loader---> ES2015 ----babel-loader--> ES5`. This lets us use the *dynamic 
+import statement* in TS 2.4 for defining async components.
 . Removed .vue.html extension and named back to .vue - works better with the
 https://marketplace.visualstudio.com/items?itemName=octref.vetur[vetur] plugin
 under VS Code.
