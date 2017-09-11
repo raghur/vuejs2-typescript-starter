@@ -181,7 +181,7 @@
     "assertion-error": {
       "version": "1.0.2",
       "from": "assertion-error@>=1.0.1 <2.0.0",
-      "resolved": "https://nuget.aditicloud.com/npm/npm/assertion-error/-/assertion-error-1.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/assertion-error/-/assertion-error-1.0.2.tgz"
     },
     "async": {
       "version": "2.5.0",
@@ -1017,7 +1017,7 @@
     "detect-indent": {
       "version": "4.0.0",
       "from": "detect-indent@>=4.0.0 <5.0.0",
-      "resolved": "https://nuget.aditicloud.com/npm/npm/detect-indent/-/detect-indent-4.0.0.tgz"
+      "resolved": "https://registry.npmjs.org/detect-indent/-/detect-indent-4.0.0.tgz"
     },
     "di": {
       "version": "0.0.1",
@@ -1339,7 +1339,7 @@
     "fs.realpath": {
       "version": "1.0.0",
       "from": "fs.realpath@>=1.0.0 <2.0.0",
-      "resolved": "https://nuget.aditicloud.com/npm/npm/fs.realpath/-/fs.realpath-1.0.0.tgz"
+      "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
     },
     "function-bind": {
       "version": "1.1.0",
@@ -1396,7 +1396,7 @@
     "growl": {
       "version": "1.9.2",
       "from": "growl@1.9.2",
-      "resolved": "https://nuget.aditicloud.com/npm/npm/growl/-/growl-1.9.2.tgz"
+      "resolved": "https://registry.npmjs.org/growl/-/growl-1.9.2.tgz"
     },
     "har-schema": {
       "version": "1.0.5",
