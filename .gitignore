@@ -158,6 +158,8 @@ publish/
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/packages/repositories.config
+# NPM install package lock
+package-lock.json
 
 # Microsoft Azure Build Output
 csx/
