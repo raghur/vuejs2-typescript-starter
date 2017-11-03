@@ -1,32 +1,33 @@
 {
-  "include": [
-    "ClientApp/**/*",
-    "vue-shims.d.ts"
-  ],
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "target": "es2015",
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "types": [
-        "chai",
-        "mocha",
-        "node",
-        "sinon",
-        "sinon-chai",
-        "webpack-env"
+    "include": [
+        "ClientApp/**/*",
+        "vue-shims.d.ts",
+        "test/unit/**/*"
     ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "strict": false,
-    "lib": ["es2015", "dom"]
-  },
-  "exclude": [
-      "bin",
-      "node_modules"
-  ]
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "target": "es2015",
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "types": [
+            "chai",
+            "mocha",
+            "node",
+            "sinon",
+            "sinon-chai",
+            "webpack-env"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "strict": false,
+        "lib": ["es2015", "dom"]
+    },
+    "exclude": [
+        "bin",
+        "node_modules"
+    ]
 }

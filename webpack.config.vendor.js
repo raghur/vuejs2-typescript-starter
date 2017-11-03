@@ -1,15 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = (env) => {
-    const isDevBuild = !(env && env.prod);
-    const extractCSS = new ExtractTextPlugin('vendor.css');
+    const isDevBuild = !(env && env.prod)
+    const extractCSS = new ExtractTextPlugin('vendor.css')
 
     return [{
         stats: { modules: false },
         resolve: { extensions: [ '.js' ] },
-        devtool: "source-map",
+        devtool: 'source-map',
         entry: {
             vendor: [
                 'bootstrap',
@@ -20,7 +20,7 @@ module.exports = (env) => {
                 'vue',
                 'vue-router',
                 'vuex'
-            ],
+            ]
         },
         module: {
             exprContextRegExp: /$^/,
@@ -30,7 +30,7 @@ module.exports = (env) => {
                 { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
             ]
         },
-        output: { 
+        output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),
             publicPath: 'dist/',
             filename: '[name].js',
@@ -55,5 +55,5 @@ module.exports = (env) => {
                 }
             })
         ])
-    }];
-};
+    }]
+}
