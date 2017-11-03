@@ -75,8 +75,8 @@
     "webpack-hot-middleware": "^2.20.0"
   },
   "scripts": {
-    "test": "node node_modules/karma/bin/karma start test/unit/karma.conf.js --single-run",
-    "test:debug": "node node_modules/karma/bin/karma start test/unit/karma.conf.js --no-single-run --debug --browsers PhantomJS",
+    "test": "npm run eslint && node node_modules/karma/bin/karma start test/unit/karma.conf.js --single-run",
+    "test:debug": "npm run eslint && node node_modules/karma/bin/karma start test/unit/karma.conf.js --no-single-run --debug --browsers PhantomJS",
     "eslint": "eslint --ext .js,.vue ClientApp test/unit/specs",
     "tslint": "tslint -s  node_modules/custom-tslint-formatters/formatters -t grouped 'ClientApp/**/*.ts' 'test/unit/**/*.ts'"
   }
