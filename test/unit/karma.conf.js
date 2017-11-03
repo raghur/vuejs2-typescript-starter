@@ -10,7 +10,7 @@ if (process.argv.some(isDebug)) {
     console.log('Is Debugging', true)
     env.debugging = 1
 }
-var webpackConfig = require('./webpack.config')(env)
+var webpackConfig = require('../../webpack.config')(env)
 
 module.exports = function (config) {
     config.set({
@@ -20,22 +20,22 @@ module.exports = function (config) {
         // 2. add it to the `browsers` array below.
         browsers: ['jsdom'],
         frameworks: [
-            'mocha', 'sinon-chai'
+            'mocha', 'sinon-chai', 'phantomjs-shim'
         ],
         reporters: [
             'spec', 'coverage-istanbul'
         ],
         files: [
-            'wwwroot/dist/vendor.js', {
-                pattern: 'wwwroot/dist/*.map',
+            '../../wwwroot/dist/vendor.js', {
+                pattern: '../../wwwroot/dist/*.map',
                 included: false,
                 served: true
             },
-            'node_modules/babel-polyfill/dist/polyfill.js',
-            'test/index.ts'
+            '../../node_modules/babel-polyfill/dist/polyfill.js',
+            'index.ts'
         ],
         preprocessors: {
-            'test/index.ts': ['webpack', 'sourcemap']
+            'index.ts': ['webpack', 'sourcemap']
         },
         plugins: [
             // Launchers
@@ -52,7 +52,10 @@ module.exports = function (config) {
 
             // Reporters
             'karma-spec-reporter',
-            'karma-coverage-istanbul-reporter'
+            'karma-coverage-istanbul-reporter',
+
+            // Shim
+            'karma-phantomjs-shim'
         ],
         webpack: webpackConfig,
         webpackMiddleware: {
@@ -62,7 +65,7 @@ module.exports = function (config) {
             reports: [
                 'html', 'text-summary'
             ],
-            dir: path.join(__dirname, './test/coverage'),
+            dir: path.join(__dirname, 'coverage'),
             fixWebpackSourcePaths: true
         },
         mime: {

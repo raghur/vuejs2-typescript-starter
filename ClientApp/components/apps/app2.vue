@@ -5,16 +5,16 @@
     </div>
 </template>
 
-<script> 
-import Vue from 'vue';
+<script>
+import Vue from 'vue'
 export default Vue.component('app2', {
     props: ['greeting'],
-    data:  () => {
+    data: () => {
         return {
-            showmsg:  true,
-            title:  "the title",
-            message:  "Hello Vue world! "
+            showmsg: true,
+            title: 'the title',
+            message: 'Hello Vue world! '
         }
     }
-});
+})
 </script>

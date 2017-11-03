@@ -9,9 +9,9 @@
 
 <script>
 
-export default  {
+export default {
     components: {
-        'slot-comp': () => import(/* webpackChunkName: "comps" */"./slot-comp.vue")
+        'slot-comp': () => import(/* webpackChunkName: "comps" */'./slot-comp.vue')
     }
-} 
+}
 </script>

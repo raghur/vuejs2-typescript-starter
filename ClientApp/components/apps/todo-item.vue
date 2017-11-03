@@ -7,5 +7,7 @@ c<template >
 </template>
 <script src="./todo-item.ts" />
 <style scoped>
-    li {padding: 5px;}
+    li {
+        padding: "5px";
+    }
 </style>

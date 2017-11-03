@@ -8,9 +8,9 @@ Vue.config.productionTip = false
 Function.prototype.bind = require('function-bind')
 
 // requires all tests in `project/unit/*.spec.js`
-const tests = require.context('./unit/specs', true, /\.spec\.ts$/);
-tests.keys().forEach(tests);
+const tests = require.context('./specs', true, /\.spec\.ts$/)
+tests.keys().forEach(tests)
 
 // requires all components in `ClientApp/**/*.js|ts|vue`
-const components = require.context('../ClientApp/', true, /\.(ts|vue)$/);
-components.keys().forEach(components);
+const components = require.context('../../ClientApp/', true, /\.(ts|vue)$/)
+components.keys().forEach(components)

@@ -18,25 +18,23 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import app3 from './app3.vue'
 import todoEditor from './todo-editor.vue'
-import {MUTATIONS} from "../../store"
+import { MUTATIONS } from '../../store'
 export default {
     components: {
-         todoEditor,
-         app3
+        todoEditor,
+        app3
     },
     computed: {
-        hasActive: function(this:Vue) {
+        hasActive: function () {
             return this.$store.getters.hasActive || this.$store.getters.isAdding
         }
     },
     methods: {
-        newItem(this:Vue) {
+        newItem () {
             this.$store.commit(MUTATIONS.ADDTODO)
         }
     }
 }
-
 </script>

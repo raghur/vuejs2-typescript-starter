@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {expect} from 'chai'
-import {mount} from 'avoriaz'
+import { expect } from 'chai'
+import { mount } from 'avoriaz'
 import sinon from 'sinon'
 import app3 from '../../../ClientApp/components/apps/app3.vue'
 import realstore from '../../../ClientApp/store'
@@ -15,8 +15,8 @@ describe('app3.vue', () => {
     beforeEach(() => {
         getters = {
             hasActive: sinon.stub(),
-            todos: sinon.stub().returns( [{
-                    text:"an item"
+            todos: sinon.stub().returns([{
+                    text: 'an item'
                 }])
         }
         store = new Vuex.Store({
@@ -25,16 +25,16 @@ describe('app3.vue', () => {
         })
     })
 
-    it("should render header text if prop is set", ()=> {
-        const wrapper = mount(app3, {store})
+    it('should render header text if prop is set', () => {
+        const wrapper = mount(app3, { store })
         wrapper.setProps({
-            headerText: "a header",
+            headerText: 'a header',
             simple: true
         })
         expect(wrapper.text()).to.contain('a header')
     })
 
-    it("should render todos", (done)=> {
+    it('should render todos', (done) => {
         // test against the real store for illustration.
         const wrapper = mount(app3, {
             store: realstore,
@@ -44,8 +44,8 @@ describe('app3.vue', () => {
         })
         expect(wrapper.text()).not.to.contain('a header')
         Vue.nextTick(() => {
-            expect(wrapper.find("li").length).to.equal(3)
-            expect(wrapper.find("li")[0].text()).to.contain("item 1")
+            expect(wrapper.find('li').length).to.equal(3)
+            expect(wrapper.find('li')[0].text()).to.contain('item 1')
             done()
         })
     })
