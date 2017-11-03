@@ -10,9 +10,19 @@
     "moduleResolution": "node",
     "target": "es2015",
     "sourceMap": true,
-    "skipDefaultLibCheck": true,
-    "strict": true,
-    "types": ["webpack-env"],
+    "skipLibCheck": true,
+    "types": [
+        "chai",
+        "mocha",
+        "node",
+        "sinon",
+        "sinon-chai",
+        "webpack-env"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "strict": false,
     "lib": ["es2015", "dom"]
   },
   "exclude": [

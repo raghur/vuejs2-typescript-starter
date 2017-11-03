@@ -18,10 +18,13 @@ module.exports = (env) => {
                 'isomorphic-fetch',
                 'jquery',
                 'vue',
-                'vue-router'
+                'vue-router',
+                'vuex'
             ],
         },
         module: {
+            exprContextRegExp: /$^/,
+            exprContextCritical: false,
             rules: [
                 { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) },
                 { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
