@@ -1,10 +1,9 @@
 <template>
     <div>
         <h1>Weather forecast</h1>
-
         <p>This component demonstrates fetching data from the server.</p>
 
-        <table v-if="forecasts.length" class="table">
+        <table v-if="forecastStatus.received" class="table">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -21,9 +20,17 @@
                     <td>{{ item.summary }}</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr><td colspan="4">Total Count: {{countForecasts}}</td></tr>
+                <tr><td colspan="4">Time spent: {{requestTimeSpent}}</td></tr>
+            </tfoot>
         </table>
-
-        <p v-else><em>Loading...</em></p>
+        
+        <p v-if="forecastStatus.loading"><em>Loading...</em></p>
+        <div v-if="forecastStatus.failed">
+            <h3>Oops, seems like there is something wrong</h3>
+            <p>reason: {{failedReason}}</p>
+        </div>
     </div>
 </template>
 

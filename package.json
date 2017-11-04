@@ -71,6 +71,7 @@
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "vuex": "^3.0.1",
+    "vuex-typescript": "^0.1.0",
     "webpack": "^2.7.0",
     "webpack-hot-middleware": "^2.20.0"
   },
