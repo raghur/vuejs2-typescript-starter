@@ -33,15 +33,14 @@ export default class FetchDataComponent extends Vue {
         Forecast.commitClear(this.$store)
     }
 
-    reload () {
+    async reload () {
         let rt = Date.now()
-        Forecast.dispatchRequestForecastData(this.$store)
-            .then(() => {
-                this.timeSpent = (Date.now() - rt)
-            })
-            .catch((reason) => {
-                this.failedReason = reason
-            })
+        try {
+            await Forecast.dispatchRequestForecastData(this.$store)
+        } catch (e) {
+            this.failedReason = e
+        }
+        this.timeSpent = (Date.now() - rt)
     }
 
     loading () {

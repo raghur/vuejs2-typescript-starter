@@ -1,6 +1,7 @@
 {
     "include": [
         "ClientApp/**/*",
+        "typings.d.ts",
         "test/unit/**/*"
     ],
     "compilerOptions": {
@@ -23,7 +24,7 @@
             "node_modules/@types"
         ],
         "strict": false,
-        "lib": ["es2015", "dom"],
+        "lib": ["es2015", "dom", "es2017"],
         "allowJs": true
     },
     "exclude": [
