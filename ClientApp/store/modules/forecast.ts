@@ -1,5 +1,5 @@
 import { getStoreAccessors } from 'vuex-typescript'
-import { State as RootState } from '../index'
+import State from '../state'
 import { ActionContext, Store } from 'vuex'
 
 /* ---------------------------------------------------------------- */
@@ -27,7 +27,7 @@ export interface ForecastState {
     forecastData: WeatherForecast[]
 }
 
-type ForecastContext = ActionContext<ForecastState, RootState>
+type ForecastContext = ActionContext<ForecastState, State>
 
 /* ---------------------------------------------------------------- */
 // State
@@ -35,12 +35,16 @@ type ForecastContext = ActionContext<ForecastState, RootState>
 // The state of the store. Define your state in this section.
 /* ---------------------------------------------------------------- */
 
+const defaultForecastStatus = {
+    loading: false,
+    failed: false,
+    received: false
+}
+
 const state: ForecastState = {
     // Define properties
     forecastStatus: {
-        loading: false,
-        failed: false,
-        received: false
+        ...defaultForecastStatus
     },
     forecastData: []
 }
@@ -53,36 +57,33 @@ const state: ForecastState = {
 /* ---------------------------------------------------------------- */
 
 const mutations = {
+    setClear (state: ForecastState) {
+        state.forecastStatus = {
+           ...defaultForecastStatus
+        }
+        state.forecastData = []
+    },
     setReceivedForecastData (state: ForecastState, forecastData: WeatherForecast[]) {
-        const status: RequestStatus = {
-            loading: false,
-            failed: false,
+        state.forecastStatus = {
+            ...defaultForecastStatus,
             received: true
         }
-        // change status
-        state.forecastStatus = status
         // set forecast data
         state.forecastData = forecastData
     },
     setForecastStatusLoading (state: ForecastState) {
-        const status: RequestStatus = {
-            loading: true,
-            failed: false,
-            received: false
+        state.forecastStatus = {
+            ...defaultForecastStatus,
+            loading: true
         }
-        // change status
-        state.forecastStatus = status
         // reset forecast data when try to reload data
         state.forecastData = []
     },
     setForecastStatusFailed (state: ForecastState) {
-        const status: RequestStatus = {
-            loading: false,
-            failed: true,
-            received: false
+        state.forecastStatus = {
+            ...defaultForecastStatus,
+            failed: true
         }
-        // change status
-        state.forecastStatus = status
         // reset forecast data when try to reload data
         state.forecastData = []
     }
@@ -116,6 +117,9 @@ const getters = {
 /* ---------------------------------------------------------------- */
 
 const actions = {
+    resetForecastData (context: ForecastContext) {
+        commitClear(context)
+    },
     requestForecastData (context: ForecastContext) {
         return new Promise((resolve, reject) => {
             commitForecastStatusLoading(context)
@@ -161,7 +165,7 @@ export default store
 
 // Get the accessor to specified store
 // The namespace must be equal to the name in the root store
-const { commit, read, dispatch } = getStoreAccessors<ForecastState, RootState>('forecast')
+const { commit, read, dispatch } = getStoreAccessors<ForecastState, State>('forecast')
 
 /* ---------------------------------------------------------------- */
 
@@ -169,6 +173,7 @@ const { commit, read, dispatch } = getStoreAccessors<ForecastState, RootState>('
 // export const commitSomething = commit(mutations.do_something)
 
 // write your code here
+export const commitClear = commit(mutations.setClear)
 export const commitForecastStatusFailed = commit(mutations.setForecastStatusFailed)
 export const commitForecastStatusLoading = commit(mutations.setForecastStatusLoading)
 export const commitReceivedForecastData = commit(mutations.setReceivedForecastData)

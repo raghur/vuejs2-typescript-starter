@@ -1,31 +1,39 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import * as Forecast from '../../store/modules/forecast'
+import { Getter } from '../../decorators'
 
 @Component
 export default class FetchDataComponent extends Vue {
-
     timeSpent: number = 0
     failedReason: string = ''
 
-    get forecasts (): Forecast.WeatherForecast[] {
-        return Forecast.getForecastData(this.$store)
-    }
+    @Getter(Forecast.getForecastData)
+    forecasts: Forecast.WeatherForecast[]
 
-    get countForecasts (): number {
-        return Forecast.getCountForecastData(this.$store)
-    }
+    @Getter(Forecast.getCountForecastData)
+    countForecasts: number
 
-    get forecastStatus (): Forecast.RequestStatus {
-        return Forecast.getForecastStatus(this.$store)
-    }
+    @Getter(Forecast.getForecastStatus)
+    forecastStatus: Forecast.RequestStatus
 
     get requestTimeSpent (): string {
         return `${this.timeSpent}ms`
     }
 
     mounted () {
-        // Forecast
+        this.reload()
+    }
+
+    beforeDestroy () {
+        this.clear()
+    }
+
+    clear () {
+        Forecast.commitClear(this.$store)
+    }
+
+    reload () {
         let rt = Date.now()
         Forecast.dispatchRequestForecastData(this.$store)
             .then(() => {
@@ -35,4 +43,13 @@ export default class FetchDataComponent extends Vue {
                 this.failedReason = reason
             })
     }
-}
+
+    loading () {
+        Forecast.commitForecastStatusLoading(this.$store)
+    }
+
+    failed () {
+        Forecast.commitForecastStatusFailed(this.$store)
+    }
+
+ }

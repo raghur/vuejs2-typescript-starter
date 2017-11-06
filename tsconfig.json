@@ -1,7 +1,6 @@
 {
     "include": [
         "ClientApp/**/*",
-        "vue-shims.d.ts",
         "test/unit/**/*"
     ],
     "compilerOptions": {
