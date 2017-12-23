@@ -5,11 +5,17 @@
         "test/unit/**/*"
     ],
     "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@app/*": ["ClientApp/*"],
+            "@components/*": ["ClientApp/components/*"],
+            "@store/*": ["ClientApp/store/*"]
+        },
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "module": "esnext",
         "moduleResolution": "node",
-        "target": "es2015",
+        "target": "es5",
         "sourceMap": true,
         "skipLibCheck": true,
         "types": [

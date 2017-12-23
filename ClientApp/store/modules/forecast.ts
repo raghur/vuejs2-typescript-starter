@@ -63,7 +63,7 @@ const mutations = {
         }
         state.forecastData = []
     },
-    setReceivedForecastData (state: ForecastState, forecastData: WeatherForecast[]) {
+    setForecastDataDidReceived (state: ForecastState, forecastData: WeatherForecast[]) {
         state.forecastStatus = {
             ...defaultForecastStatus,
             received: true
@@ -71,7 +71,7 @@ const mutations = {
         // set forecast data
         state.forecastData = forecastData
     },
-    setForecastStatusLoading (state: ForecastState) {
+    setForecastStatusDidStarted (state: ForecastState) {
         state.forecastStatus = {
             ...defaultForecastStatus,
             loading: true
@@ -79,7 +79,7 @@ const mutations = {
         // reset forecast data when try to reload data
         state.forecastData = []
     },
-    setForecastStatusFailed (state: ForecastState) {
+    setForecastStatusDidFailed (state: ForecastState) {
         state.forecastStatus = {
             ...defaultForecastStatus,
             failed: true
@@ -117,26 +117,22 @@ const getters = {
 /* ---------------------------------------------------------------- */
 
 const actions = {
-    resetForecastData (context: ForecastContext) {
+    async resetForecastData (context: ForecastContext) {
         commitClear(context)
     },
-    requestForecastData (context: ForecastContext) {
-        return new Promise((resolve, reject) => {
-            commitForecastStatusLoading(context)
-            // loading api to received data
-            fetch('api/SampleData/WeatherForecasts')
-                .then(response => response.json() as Promise<WeatherForecast[]>)
-                    .then(data => {
-                        commitReceivedForecastData(context, data)
-                        // tell someone this dispatch action is resolved
-                        resolve()
-                    })
-                .catch((reason) => {
-                    // tell someone this dispatch action is rejected
-                    commitForecastStatusFailed(context)
-                    reject(reason)
-                })
-        })
+    async requestForecastData (context: ForecastContext) {
+        commitForecastStatusDidStarted(context)
+        // loading api to received data
+        try {
+            const response = await fetch('api/SampleData/WeatherForecasts')
+            const data = await response.json() as WeatherForecast[]
+            commitForecastDataDidReceived(context, data)
+            return true
+        } catch (reason) {
+            commitForecastStatusDidFailed(context)
+        }
+
+        return false
     }
 }
 
@@ -174,9 +170,9 @@ const { commit, read, dispatch } = getStoreAccessors<ForecastState, State>('fore
 
 // write your code here
 export const commitClear = commit(mutations.setClear)
-export const commitForecastStatusFailed = commit(mutations.setForecastStatusFailed)
-export const commitForecastStatusLoading = commit(mutations.setForecastStatusLoading)
-export const commitReceivedForecastData = commit(mutations.setReceivedForecastData)
+export const commitForecastStatusDidFailed = commit(mutations.setForecastStatusDidFailed)
+export const commitForecastStatusDidStarted = commit(mutations.setForecastStatusDidStarted)
+export const commitForecastDataDidReceived = commit(mutations.setForecastDataDidReceived)
 
 /* ---------------------------------------------------------------- */
 

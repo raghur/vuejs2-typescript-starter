@@ -1,16 +1,21 @@
-// decorators.js
 import { createDecorator } from 'vue-class-component'
 import { mapGetters } from 'vuex'
 import { store } from './store'
 
-export const Getter = (fn: Function): PropertyDecorator => {
+export const Getter = (fn: Function, propertyPath?: string): PropertyDecorator => {
     return createDecorator((options, key) => {
-        // component options should be passed to the callback
-        // and update for the options object affect the component
+        options.computed = (!options.computed) ? {} : options.computed
         options.computed[key] = {
             set: undefined,
             get: () => {
                 // pass the root store into the function
+                if (propertyPath) {
+                    let subValue = fn(store)
+                    for (const pKey of propertyPath.split('.')) {
+                        subValue = subValue[pKey]
+                    }
+                    return subValue
+                }
                 return fn(store)
             }
         }

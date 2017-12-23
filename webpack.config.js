@@ -41,10 +41,15 @@ module.exports = (env) => {
         },
         context: __dirname,
         resolve: {
-            extensions: ['.js', '.ts', '.vue']
+            extensions: ['.js', '.ts', '.vue'],
+            alias: {
+                '@app': path.resolve('./ClientApp'),
+                '@components': path.resolve('./ClientApp/components'),
+                '@store': path.resolve('./ClientApp/store')
+            }
         },
         entry: {
-            'main': ['./ClientApp/boot.ts']
+            'main': ['babel-polyfill', './ClientApp/boot.ts']
         },
         module: {
             rules: [{

@@ -1,18 +1,17 @@
+import 'isomorphic-fetch' // Allow ie11 to use fetch
 import './static/site.css'
 import 'bootstrap'
 import Vue from 'vue'
 import './hooks' // This must be imported before any component
-import router from './router'
-import store from './store'
-import directives from './directives'
+import Directives from './directives'
 
-Vue.use(directives)
+Vue.use(Directives)
 
 /* tslint:disable-next-line:no-unused-expression */
 new Vue({
     el: '#app-root',
     template: '<app/>',
-    store,
-    router,
-    render: h => h(require('./components/app/app.vue'))
+    store: require('./store').default,
+    router: require('./router').default,
+    render: h => h(require('./components/app/app.vue').default)
 })

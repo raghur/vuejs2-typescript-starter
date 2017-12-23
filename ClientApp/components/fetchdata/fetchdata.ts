@@ -35,20 +35,21 @@ export default class FetchDataComponent extends Vue {
 
     async reload () {
         let rt = Date.now()
-        try {
-            await Forecast.dispatchRequestForecastData(this.$store)
-        } catch (e) {
-            this.failedReason = e
+        const result = await await Forecast.dispatchRequestForecastData(this.$store)
+        if (result) {
+            this.timeSpent = (Date.now() - rt)
+        } else {
+            this.failedReason = 'Could not get data from remote server'
         }
-        this.timeSpent = (Date.now() - rt)
     }
 
     loading () {
-        Forecast.commitForecastStatusLoading(this.$store)
+        Forecast.commitForecastStatusDidStarted(this.$store)
     }
 
     failed () {
-        Forecast.commitForecastStatusFailed(this.$store)
+        Forecast.commitForecastStatusDidFailed(this.$store)
+        this.failedReason = ':) you just set failed'
     }
 
  }
