@@ -33,17 +33,18 @@ import statement* in TS 2.4 for defining async components.
 https://marketplace.visualstudio.com/items?itemName=octref.vetur[vetur] plugin
 under VS Code.
 
+
 ## Getting started
 
 . Clone this repo
-. Run `npm install`
+. Run `yarn install`. # Read <<Why Yarn (aka Why not NPM),Why Yarn>> below
 . `set ASPNETCORE_ENVIRONMENT=Development`
 . Run it with `dotnet run`
 . Visit `localhost:5000/`
 
 ### To run client side tests
 
-After you have done `npm install` run `npm run test`
+After you have done `yarn install` run `yarn run test`
 
 ## Notes - Unit testing and code coverage.
 
@@ -83,3 +84,25 @@ documented. In the end, I could get it to work only with the following:
         ]
 -------------
 . Use `karma-sourcemap-loader` in karma conf
+
+## Why Yarn (aka Why not NPM)
+
+So when I started this repo, I did not know any better and used npm. And then there were problems!
+
+### Background
+`Package.json` only specifies a semver range and w ith packages being updated
+all the time and front end projects seemingly depending on 10s of packages and
+then those depending on further packages, it's a miracle that anything actually
+works. To get around this and have reproducible builds, NPM generates
+`npm-shrinkwrap.json` which you're supposed to commit into version control.
+Good - that's what I did but it turns out that it didn't do what it said on the tin.
+
+After a few months when I cloned this repo, I started getting weird errors that
+I did not remember seeing earlier. Ditto for the folks who cloned this repo. 
+
+Bottomline - `npm-shrinkwrap.json` is supposed to give you reproducible set of
+packages in `node_modules` only that it doesn't. Apparently, this is in part
+due to NPM's use of non-deterministic resolution algorithm. Should you want to
+read more, here's a couple of links - https://stackoverflow.com/a/40057535[SO:
+What is the difference between yarn.lock and npm's shrinkwrap?] and
+https://yarnpkg.com/en/docs/yarn-lock[Yarn.lock]

@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const bundleOutputDir = './wwwroot/dist';
 var babelLoader = {
@@ -101,7 +102,7 @@ module.exports = (env) => {
             })
         ]
         .concat(isDevBuild || isTestBuild ? [
-            // this is required for source map debugging 
+            // this is required for source map debugging
             new webpack.SourceMapDevToolPlugin({
                 filename: null, // only inline source maps seem to work when debugging with chrome
                 moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]'), // Point sourcemap entries to the original file locations on disk
@@ -113,13 +114,9 @@ module.exports = (env) => {
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]'), // Point sourcemap entries to the original file locations on disk
             }),
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false
-                }
-            }),
+            new UglifyJsPlugin(),
             new ExtractTextPlugin('site.css')
         ])
-    }, 
+    },
 ];
 };
