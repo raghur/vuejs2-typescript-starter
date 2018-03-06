@@ -9,7 +9,6 @@
     "@types/sinon-chai": "^2.7.29",
     "@types/webpack-env": "^1.13.0",
     "aspnet-webpack": "^2.0.1",
-    "avoriaz": "^4.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -53,11 +52,14 @@
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.13",
     "vuex": "^3.0.1",
+    "@vue/test-utils": "^1.0.0-beta.12",
     "webpack": "^2.2.0",
     "webpack-hot-middleware": "^2.12.2"
   },
   "scripts": {
     "test": "node node_modules/karma/bin/karma start --single-run",
     "test:debug": "node node_modules/karma/bin/karma start --no-single-run --debug --browsers PhantomJS"
+  },
+  "dependencies": {
   }
 }

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {expect} from 'chai'
-import {mount} from 'avoriaz'
+import {mount} from '@vue/test-utils'
 import sinon from 'sinon'
 import app3 from '../../ClientApp/components/apps/app3.vue'
 import realstore from '../../ClientApp/store'
@@ -33,7 +33,7 @@ describe('app3.vue', () => {
         expect(wrapper.text()).to.contain('a header')
     });
 
-    it("should render todos", (done)=> {
+    it("should render todos", ()=> {
         // test against the real store for illustration.
         const wrapper = mount(app3, {
             store: realstore,
@@ -42,10 +42,7 @@ describe('app3.vue', () => {
             }
         });
         expect(wrapper.text()).not.to.contain('a header')
-        Vue.nextTick(() => {
-            expect(wrapper.find("li").length).to.equal(3)
-            expect(wrapper.find("li")[0].text()).to.contain("item 1")
-            done();
-        })
+        expect(wrapper.findAll("li").length).to.equal(3)
+        expect(wrapper.find("li").text()).to.contain("item 1")
     });
 });
